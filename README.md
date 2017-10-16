@@ -2,3 +2,4 @@
 
 - geometry_point.html 画出一个点
 - geometry_line.html 画出一条线
+- synthesis_demo.html 综合练习
