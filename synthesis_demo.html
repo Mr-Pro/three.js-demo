@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>day0613</title>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="js/three.js"></script>
+    <script src="js/stats.min.js"></script>
+    <script src="js/dat.gui.js"></script>
+    <script src="js/Detector.js"></script>
+    <script src="js/DDSLoader.js"></script>
+    <script src="js/OBJLoader.js"></script>
+    <script src="js/MTLLoader.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/day0613.js"></script>
+    <script src="js/Mirror.js"></script>
+
+</head>
+<body>
+<!--用于加载视频资源-->
+<video id="video" src="video/sintel.ogv" style="display: none; left: 15px; top: 75px;"></video>
+
+<div id="webgl" style="position: absolute; left: 0; top: 0;"></div>
+
+<script type="text/javascript">
+    threeStart();
+</script>
+</body>
+</html>
