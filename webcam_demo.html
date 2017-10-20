@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>webcam_demo</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="js/three.js"></script>
+    <script src="js/stats.min.js"></script>
+    <script src="js/dat.gui.js"></script>
+    <script src="js/Detector.js"></script>
+    <script src="js/DDSLoader.js"></script>
+    <script src="js/day1020.js"></script>
+    <script src="js/OrbitControls.js"></script>
+</head>
+<body>
+<!--加载我们要看的视频-->
+<video id="video" src="video/sintel.ogv" style="display: none; left: 15px; top: 75px;"></video>
+<!--加载我们的摄像机的图像-->
+<video id="webcam" autoplay style="display: none; width: 320px; height: 240px;"></video>
+
+<div id="canvasLayers" style="position: relative; left: 0; top: 0;">
+    <!--画摄像头输出图像-->
+    <canvas id="videoCanvas" width="320" height="240" style="z-index: 1; position: absolute; left:0; top:0; opacity:0.5;"></canvas>
+    <!--画出按钮-->
+    <canvas id="layer2"  width="320" height="240" style="z-index: 2; position: absolute; left:0; top:0; opacity:0.5;"></canvas>
+</div>
+<canvas id="blendCanvas" style="display: none; position: relative; left: 320px; top: 240px; width: 320px; height: 240px;"></canvas>
+
+<!--加载摄像机，主要是将我们的摄像机获取的图像数据放入video#webcam中-->
+<script>
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia;
+
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({ audio: false, video: { width: 1280, height: 720 } },
+            function(stream) {
+                var video = document.querySelector('#webcam');
+                video.srcObject = stream;
+                video.onloadedmetadata = function(e) {
+                    video.play();
+                };
+            },
+            function(err) {
+                console.log("当前错误：" + err.name);
+            }
+        );
+    } else {
+        console.log("设备不支持");
+    }
+</script>
+
+<!--用作渲染器的容器-->
+<div id="webgl" style="position: absolute; left: 0; top: 0;"></div>
+<!--这里的js文件是操作我们图像处理部分的-->
+<script src="js/webcam.js"></script>
+<script type="text/javascript">
+    threeStart();
+</script>
+
+</body>
+</html>
